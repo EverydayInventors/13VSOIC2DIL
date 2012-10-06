@@ -1,6 +1,8 @@
 13VSOIC2DIL
 ===========
+
 Copyright 2011,2012 The Free Software Foundation
+
 Copyright 2011,2012 Everyday Inventors, LLC.
 
 13VSOIC2DIL Breakout Board is a very minimal breakout board for the 8 pin SOIC
