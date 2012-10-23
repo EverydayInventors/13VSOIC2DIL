@@ -3,6 +3,7 @@
   ATtiny13V 8SOICto8DIL Board Larson Scanner Test Program
   Programmed by David Dahl, Everyday Inventors, LLC.
   Copyright 2011, 2012 Free Software Foundation
+  Copyright 2011, 2012 Everyday Inventors, LLC.
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -38,8 +39,8 @@
 
 #include <stdint.h>
 
-#define FADE_RATE 20  /* iterations of ISR needed to fade LED values by 1 */
-#define LED_DELAY 26  /* delay in ms between updating LED values */
+#define FADE_RATE 60  /* iterations of ISR needed to fade LED values by 1 */
+#define LED_DELAY 35  /* delay in ms between updating LED values */
 #define MAX_LEDS 5
 
 /*[ Global Variables ]-------------------------------------------------------*/
@@ -93,13 +94,13 @@ int main()
     for( led_index = 0; led_index < MAX_LEDS; led_index++ ) {
       led_value[ led_index ] = 0xFF;
       _delay_ms( LED_DELAY );
-      led_value[ led_index ] = 0xFE;
+      //led_value[ led_index ] = 0xFE;
     }
 
-    for( led_index = MAX_LEDS - 2; led_index > 0; led_index-- ) {
+    for( led_index = MAX_LEDS - 1; led_index >= 0; led_index-- ) {
       led_value[ led_index ] = 0xFF;
 	  _delay_ms( LED_DELAY );
-      led_value[ led_index ] = 0xFE;
+      //led_value[ led_index ] = 0xFE;
     }
   }
   
@@ -116,7 +117,7 @@ ISR( TIM0_OVF_vect )
   /* fade leds */
   if( fadecount++ > FADE_RATE ) {
     for( index = 0; index < MAX_LEDS; index++ )
-      if( led_value[ index ] > 0 && led_value[ index ] < 0xFF )
+      if( led_value[ index ] > 0 /*&& led_value[ index ] < 0xFF*/ )
         led_value[ index ]--;
     fadecount = 0;
   }
